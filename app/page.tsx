@@ -262,100 +262,100 @@
 
 // }
 
-"use client";
-import { useEffect, useState } from "react";
-import { set } from "react-hook-form";
+// "use client";
+// import { useEffect, useState } from "react";
+// import { set } from "react-hook-form";
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  username: string;
-  phone: string;
-}
+// interface User {
+//   id: number;
+//   name: string;
+//   email: string;
+//   username: string;
+//   phone: string;
+// }
 
-export default function UsersPage() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+// export default function UsersPage() {
+//   const [users, setUsers] = useState<User[]>([]);
+//   const [loading, setLoading] = useState<boolean>(true);
+//   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+//   useEffect(() => {
+//     const fetchUsers = async () => {
+//       try {
+//         setLoading(true);
+//         setError(null);
 
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/users"
-        );
+//         const response = await fetch(
+//           "https://jsonplaceholder.typicode.com/users"
+//         );
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch users");
-        }
+//         if (!response.ok) {
+//           throw new Error("Failed to fetch users");
+//         }
 
-        const data: User[] = await response.json();
-        setUsers(data);
+//         const data: User[] = await response.json();
+//         setUsers(data);
 
-      } catch (err) {
-        if(err instanceof Error) {
-          setError(err.message);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
+//       } catch (err) {
+//         if(err instanceof Error) {
+//           setError(err.message);
+//         }
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
 
-    fetchUsers();
-  }, []);
+//     fetchUsers();
+//   }, []);
 
-  if (loading) {
-    return( <div className="min-h-screen flex items-center justify-center">
-      <p className="text-lg font-semibold">Loading users...</p>
-      </div>
-      );
-  }
+//   if (loading) {
+//     return( <div className="min-h-screen flex items-center justify-center">
+//       <p className="text-lg font-semibold">Loading users...</p>
+//       </div>
+//       );
+//   }
 
-  if (error) {
-    return (
-    <div className="min-h-screen flex items-center justify-center">
-    <p className="text-red-500">{error}</p>
-    </div>
-    );
-  }
+//   if (error) {
+//     return (
+//     <div className="min-h-screen flex items-center justify-center">
+//     <p className="text-red-500">{error}</p>
+//     </div>
+//     );
+//   }
 
-  if (users.length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>No users found.</p>
-      </div>
-    );
-  }
+//   if (users.length === 0) {
+//     return (
+//       <div className="min-h-screen flex items-center justify-center">
+//         <p>No users found.</p>
+//       </div>
+//     );
+//   }
 
-  return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <h2 className="text-2xl font-bold mb-6 text-center">
-        Users List
-      </h2>
-      <div className="grid gap-4 max-w-3xl mx-auto">
-        {users.map(user => (
-          <div
-           key={user.id} 
-          className="bg-white p-4 rounded shadow">
+//   return (
+//     <div className="min-h-screen bg-gray-100 p-8">
+//       <h2 className="text-2xl font-bold mb-6 text-center">
+//         Users List
+//       </h2>
+//       <div className="grid gap-4 max-w-3xl mx-auto">
+//         {users.map(user => (
+//           <div
+//            key={user.id} 
+//           className="bg-white p-4 rounded shadow">
 
-        <h3 className="text-lg font-semibold">{user.name}</h3>
-        <p className="text-sm text-gray-600">{user.email}</p>
-          <p className="text-sm text-gray-600">{user.username}</p>
-          <p className="text-sm text-gray-600">{user.phone}</p>
-          </div>
-        ))}
-    </div>
-    </div>
-  );
-}
+//         <h3 className="text-lg font-semibold">{user.name}</h3>
+//         <p className="text-sm text-gray-600">{user.email}</p>
+//           <p className="text-sm text-gray-600">{user.username}</p>
+//           <p className="text-sm text-gray-600">{user.phone}</p>
+//           </div>
+//         ))}
+//     </div>
+//     </div>
+//   );
+// }
 
 
 
-{/* //---------------------------------------------------------------------------------------------------------------
+//{/* //---------------------------------------------------------------------------------------------------------------
 // "use client";
 // import {useForm} from "react-hook-form";
 
@@ -415,4 +415,57 @@ export default function UsersPage() {
 //         </form>
 //     </div>
 //     );
-// } */}
+// } */
+// }
+
+
+
+
+//------------------------------------------Day 5---------------------------------------------
+// "use client"
+// import { useState } from "react";
+// import ProductList from "@/components/ProductList";
+// import { products } from "@/features/products/data";
+// import { Product } from "@/types/product";
+
+// export default function Home() {
+//   const [cart, setCart] = useState<Product[]>([]);
+
+//   const addToCart = (product: Product) => {
+//     setCart([...cart, product]);
+//   }
+
+//   return (
+//     <main className="min-h-screen bg-gray-100 p-10">
+//       <h1 className="text-3xl font-bold">
+//         Zustand Cart Project
+//       </h1>
+//       <p className="mt-4">
+//         Cart Items: {cart.length}
+//       </p>
+//       <ProductList products={products} onAdd={addToCart} />
+//     </main>
+//   )
+// }
+
+
+"use client"
+import Link from "next/link"
+import ProductList from "@/components/ProductList"
+import { products } from "@/features/products/data"
+import { useCartStore } from "@/store/cartStore"
+
+export default function Home() {
+  const cart = useCartStore((state) => state.cart)
+  const addToCart = useCartStore((state) => state.addToCart)
+
+  return (
+    <main className="min-h-screen bg-gray-100 p-10">
+      <h1 className="text-3xl font-bold">Zustand Cart Project</h1>
+      <p className="mt-4">Cart Items: {cart.length}</p>
+      <ProductList products={products} onAdd={addToCart} />
+      <Link href="/cart" className="mt-6 inline-block bg-green-600 text-white px-4 py-2 rounded">
+      Go to Cart Page</Link>
+      </main>
+  )
+}
